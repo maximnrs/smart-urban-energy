@@ -17,5 +17,6 @@ This repository contains our Semester 1 Project 4: **Smart Urban Energy**.
 - Feie
 - Jayden
 - Maxim
+- Paul
 - Ridwaan
 - Teun
