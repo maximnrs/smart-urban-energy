@@ -2,18 +2,66 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Urban Energy Dashboard</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <h1>Smart Urban Energy Dashboard</h1>
+    <header class="header">
+      <div class="container">
+        <div class="header-left">
+          <div class="icon-box zap">⚡</div>
+          <div>
+            <h1>Smart Urban Energy Dashboard</h1>
+            <p>Energieverbruik in Nederlandse steden</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <select id="citySelect">
+            <option value="amsterdam">Amsterdam</option>
+            <option value="rotterdam">Rotterdam</option>
+            <option value="denhaag">Den Haag</option>
+            <option value="utrecht">Utrecht</option>
+          </select>
+          <select id="timeRangeSelect">
+            <option value="day">Vandaag</option>
+            <option value="week" selected>Deze week</option>
+            <option value="month">Deze maand</option>
+            <option value="year">Dit jaar</option>
+          </select>
+        </div>
+      </div>
+    </header>
 
-    <div id="dashboard">
-      <p id="energy-value">Laden...</p>
-      <p id="ai-result"></p>
-    </div>
+    <main class="container">
+      <!-- KPI Cards -->
+      <div class="grid grid-4" id="kpiCards"></div>
 
-    <script src="js/api.js"></script>
-    <script src="js/app.js"></script>
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="overview">Overzicht</button>
+        <button class="tab-button" data-tab="analysis">Analyse</button>
+        <button class="tab-button" data-tab="districts">Wijken</button>
+        <button class="tab-button" data-tab="suggestions">Adviezen</button>
+      </div>
+
+      <div class="tab-content active" id="overview">
+        <div class="card">
+          <h3>Energieverbruik Over Tijd</h3>
+          <canvas id="energyChart"></canvas>
+        </div>
+      </div>
+
+      <div class="tab-content" id="analysis"></div>
+      <div class="tab-content" id="districts"></div>
+      <div class="tab-content" id="suggestions"></div>
+    </main>
+
+    <footer>
+      <p>Smart Urban Energy Dashboard - ICT voor Duurzaamheid in Nederland</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
   </body>
 </html>

@@ -1,7 +1,173 @@
-getEnergyData().then(data => {
-    document.getElementById("energy-value").innerText =
-        "Verbruik: " + data.value + " kWh";
+// ===== Mock Data =====
+let city = 'amsterdam';
+let timeRange = 'week';
 
-    document.getElementById("ai-result").innerText =
-        data.aiAdvice;
+const totalConsumption = 1847; 
+const peakReduction = 12.3;
+const co2Reduction = 245;
+const efficiency = 87;
+
+// Wijken (districts) data
+const districtsData = [
+  { name: "Centrum", verbruik: 320, duurzaam: 120 },
+  { name: "Zuid", verbruik: 210, duurzaam: 90 },
+  { name: "Oost", verbruik: 180, duurzaam: 60 },
+  { name: "West", verbruik: 200, duurzaam: 80 },
+  { name: "Noord", verbruik: 150, duurzaam: 40 },
+];
+
+// Piekanalyse (peak analysis)
+const peakAnalysisData = [
+  { time: "07:00 - 09:00", verbruik: 250, advies: "Slimme thermostaten aanzetten" },
+  { time: "12:00 - 14:00", verbruik: 220, advies: "PV-panelen optimaliseren" },
+  { time: "18:00 - 21:00", verbruik: 300, advies: "Apparaten spreiden" },
+];
+
+// Besparingssuggesties
+const savingsSuggestions = [
+  { advies: "Gebruik energiezuinige verlichting", besparing: "15%" },
+  { advies: "Vermijd piekuren bij opladen van EV", besparing: "10%" },
+  { advies: "Optimaliseer verwarming en koeling per wijk", besparing: "20%" },
+];
+
+const kpiCardsContainer = document.getElementById('kpiCards');
+const overviewCity = document.getElementById('overviewCity');
+const districtList = document.getElementById('districtList');
+const peakAnalysis = document.getElementById('peakAnalysis');
+const savingsContainer = document.getElementById('savingsSuggestions');
+
+// ===== KPIs =====
+function renderKPIs() {
+  const timeLabels = {
+    day: ['24 uur','Vandaag'],
+    week: ['7 dagen','Deze week'],
+    month: ['30 dagen','Deze maand'],
+    year: ['365 dagen','Dit jaar']
+  };
+
+  kpiCardsContainer.innerHTML = `
+    <div class="card">
+      <h3>Totaal Verbruik</h3>
+      <p>${totalConsumption} MWh</p>
+      <p>${timeLabels[timeRange][1]}</p>
+      <span class="badge">${timeLabels[timeRange][0]}</span>
+    </div>
+    <div class="card">
+      <h3>Piekreductie</h3>
+      <p style="color:#10b981">${peakReduction}%</p>
+      <span class="badge" style="background:#d1fae5;color:#065f46">Optimaal</span>
+    </div>
+    <div class="card">
+      <h3>CO₂ Reductie</h3>
+      <p style="color:#3b82f6">${co2Reduction} ton</p>
+      <span class="badge" style="background:#dbeafe;color:#1d4ed8">Impact</span>
+    </div>
+    <div class="card">
+      <h3>Efficiëntie</h3>
+      <p style="color:#f59e0b">${efficiency}%</p>
+      <span class="badge" style="background:#fef3c7;color:#b45309">Goed</span>
+    </div>
+  `;
+}
+
+renderKPIs();
+
+// ===== Tabs =====
+document.querySelectorAll('.tab-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
 });
+
+// ===== Dropdowns =====
+document.getElementById('citySelect').addEventListener('change', (e) => {
+  city = e.target.value;
+  overviewCity.textContent = `Real-time verbruiksdata voor ${capitalize(city)}`;
+});
+document.getElementById('timeRangeSelect').addEventListener('change', (e) => {
+  timeRange = e.target.value;
+  renderKPIs();
+  renderEnergyChart();
+  renderDistricts();
+  renderPeakAnalysis();
+  renderSavings();
+});
+
+function capitalize(str){ return str.charAt(0).toUpperCase() + str.slice(1); }
+
+// ===== Charts =====
+function generateData() {
+  if(timeRange === 'day') {
+    return Array.from({length:24},(_,i)=>({
+      x: `${i}:00`,
+      verbruik: Math.floor(Math.random()*30 + 40 + Math.sin(i/4)*20),
+      duurzaam: Math.floor(Math.random()*15 + 15)
+    }));
+  } else if(timeRange === 'week') {
+    const days = ["Ma","Di","Wo","Do","Vr","Za","Zo"];
+    return days.map((d,i)=>({x:d,verbruik:Math.floor(Math.random()*50+200),duurzaam:Math.floor(Math.random()*30+80)}));
+  } else if(timeRange === 'month') {
+    return Array.from({length:30},(_,i)=>({x:i+1,verbruik:Math.floor(Math.random()*50+200),duurzaam:Math.floor(Math.random()*30+80)}));
+  } else {
+    const months = ["Jan","Feb","Mrt","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
+    return months.map(m=>({x:m,verbruik:Math.floor(Math.random()*200+1500),duurzaam:Math.floor(Math.random()*100+600)}));
+  }
+}
+
+let energyChart;
+function renderEnergyChart() {
+  const ctx = document.getElementById('energyChart').getContext('2d');
+  const data = generateData();
+  if(energyChart) energyChart.destroy();
+  energyChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map(d=>d.x),
+      datasets: [
+        {label:'Totaal Verbruik (MWh)', data:data.map(d=>d.verbruik), borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.2)', fill:true},
+        {label:'Duurzame Energie (MWh)', data:data.map(d=>d.duurzaam), borderColor:'#10b981', backgroundColor:'rgba(16,185,129,0.2)', fill:true}
+      ]
+    },
+    options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+  });
+}
+renderEnergyChart();
+overviewCity.textContent = `Real-time verbruiksdata voor ${capitalize(city)}`;
+
+// ===== Districts =====
+function renderDistricts() {
+  districtList.innerHTML = districtsData.map(d => `
+    <div class="card">
+      <h4>${d.name}</h4>
+      <p>Totaal verbruik: ${d.verbruik} MWh</p>
+      <p>Duurzame energie: ${d.duurzaam} MWh</p>
+    </div>
+  `).join('');
+}
+renderDistricts();
+
+// ===== Peak Analysis =====
+function renderPeakAnalysis() {
+  peakAnalysis.innerHTML = peakAnalysisData.map(p => `
+    <div class="card">
+      <h4>${p.time}</h4>
+      <p>Verbruik: ${p.verbruik} MWh</p>
+      <p>Advies: ${p.advies}</p>
+    </div>
+  `).join('');
+}
+renderPeakAnalysis();
+
+// ===== Savings Suggestions =====
+function renderSavings() {
+  savingsContainer.innerHTML = savingsSuggestions.map(s => `
+    <div class="card">
+      <h4>${s.advies}</h4>
+      <p>Besparing: ${s.besparing}</p>
+    </div>
+  `).join('');
+}
+renderSavings();
