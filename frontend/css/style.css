@@ -1,13 +1,131 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f2f7f3;
-  text-align: center;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f5f8fc;
+    color: #1a1a1a;
 }
 
-#dashboard {
-  padding: 20px;
-  background: white;
-  width: 300px;
-  margin: 50px auto;
-  border-radius: 10px;
+/* HEADER */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7ea;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-icon {
+    background: #0fa978;
+    color: white;
+    font-size: 24px;
+    padding: 14px;
+    border-radius: 12px;
+}
+
+.filters select {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #d8dde5;
+    font-size: 15px;
+    background: #f9f9f9;
+    margin-left: 12px;
+}
+
+/* INFO CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 113px;
+    padding: 30px 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    width: 220px;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card h2 {
+    margin: 8px 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card p {
+    margin: 0;
+    font-size: 13px;
+    color: #6c727f;
+}
+
+/* BADGES */
+.badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.gray { background:#e6e6e6; color:#555; }
+.green { background:#d9f4dd; color:#0c9b32; }
+.blue  { background:#dceafe; color:#0b63c8; }
+.orange{ background:#ffe5c7; color:#d17a00; }
+
+/* TAB MENU */
+.tabs {
+    display: flex;
+    padding: 0 40px;
+    gap: 30px;
+    margin-top: -10px;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    font-size: 17px;
+    padding: 14px 6px;
+    cursor: pointer;
+    color: #333;
+}
+
+.tabs .active {
+    background: white;
+    border-radius: 30px;
+    padding: 14px 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* GRAFIEK */
+.chart-section {
+    margin: 20px 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+.chart-placeholder {
+    height: 260px;
+    margin-top: 15px;
+    background: linear-gradient(#d5e5ff, #a6c4ff);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
 }
