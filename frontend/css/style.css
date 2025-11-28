@@ -201,3 +201,54 @@ footer {
     margin: 6px 0 0 0;
   }
 }
+
+/* ================= ANALYSIS ================= */
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.analysis-kpis {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.analysis-kpi {
+  padding: 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.analysis-kpi h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.analysis-kpi p {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* Kleuren */
+.analysis-kpi.red {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.analysis-kpi.yellow {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.analysis-kpi.green {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}

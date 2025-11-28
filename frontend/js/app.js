@@ -206,18 +206,43 @@ function renderDistricts() {
 renderDistricts();
 
 // ===== Peak Analysis =====
+let peakChart;
+
 function renderPeakAnalysis() {
-  peakAnalysis.innerHTML = peakAnalysisData
-    .map(
-      (p) => `
-    <div class="card">
-      <h4>${p.time}</h4>
-      <p>Verbruik: ${p.verbruik} MWh</p>
-      <p>Advies: ${p.advies}</p>
-    </div>
-  `
-    )
-    .join("");
+  // KPI waardes zetten
+  document.getElementById("morningPeak").textContent =
+    peakAnalysisData[0].verbruik + " MWh";
+
+  document.getElementById("eveningPeak").textContent =
+    peakAnalysisData[2].verbruik + " MWh";
+
+  document.getElementById("lowPeak").textContent =
+    Math.min(...peakAnalysisData.map((p) => p.verbruik)) + " MWh";
+
+  // Chart bouwen
+  const ctx = document.getElementById("peakChart").getContext("2d");
+
+  if (peakChart) peakChart.destroy();
+
+  peakChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: peakAnalysisData.map((p) => p.time),
+      datasets: [
+        {
+          label: "Verbruik (MWh)",
+          data: peakAnalysisData.map((p) => p.verbruik),
+          backgroundColor: ["#ef4444", "#f59e0b", "#10b981"],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+      },
+    },
+  });
 }
 renderPeakAnalysis();
 

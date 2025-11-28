@@ -53,13 +53,43 @@
         </div>
       </div>
 
-      <div class="tab-content" id="analysis"></div>
+      <div class="tab-content" id="analysis">
+        <div class="analysis-grid">
+          <!-- Chart -->
+          <div class="card chart-card">
+            <h3>Piekmoment Analyse</h3>
+            <canvas id="peakChart"></canvas>
+          </div>
+
+          <!-- KPI Blocks -->
+          <div class="analysis-kpis">
+            <div class="analysis-kpi red">
+              <h4>Ochtendspits</h4>
+              <p id="morningPeak">-</p>
+              <span class="badge">07:00 - 09:00</span>
+            </div>
+
+            <div class="analysis-kpi yellow">
+              <h4>Avondpiek</h4>
+              <p id="eveningPeak">-</p>
+              <span class="badge">18:00 - 21:00</span>
+            </div>
+
+            <div class="analysis-kpi green">
+              <h4>Daluren</h4>
+              <p id="lowPeak">-</p>
+              <span class="badge">03:00 - 05:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tab-content" id="districts"></div>
       <div class="tab-content" id="suggestions"></div>
     </main>
 
     <footer>
-      <p>Smart Urban Energy Dashboard - ICT voor Duurzaamheid in Nederland</p>
+      <p>Smart Urban Energy Dashboard</p>
     </footer>
 
     <script src="/js/app.js"></script>
