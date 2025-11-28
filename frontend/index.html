@@ -98,17 +98,30 @@
       </div>
 
       <div class="tab-content" id="suggestions">
-        <div class="suggestions-grid">
-          <!-- AI Savings Card -->
-          <div class="card ai-card">
-            <h3>🤖 AI Besparingsvoorspelling</h3>
-            <p class="ai-main" id="aiSavings">€ 0 per maand</p>
-            <p class="ai-sub">Op basis van huidig verbruik en piekmomenten</p>
+        <!-- AI Card -->
+        <div class="card ai-card">
+          <h3>🤖 AI-Gegenereerde Besparingsadviezen</h3>
+          <p class="ai-sub">
+            Op basis van data-analyse voor <span id="aiCity">Amsterdam</span>
+          </p>
+          <div class="ai-stats">
+            <div class="ai-stat">
+              <p>Totale Besparing</p>
+              <p class="ai-value" id="aiTotalSavings">€ 14.0M / jaar</p>
+            </div>
+            <div class="ai-stat">
+              <p>CO₂ Reductie</p>
+              <p class="ai-value" id="aiCO2">1.915 ton</p>
+            </div>
+            <div class="ai-stat">
+              <p>Actieve Adviezen</p>
+              <p class="ai-value" id="aiActive">6 prioriteiten</p>
+            </div>
           </div>
-
-          <!-- Suggestions -->
-          <div class="suggestions-cards" id="suggestionCards"></div>
         </div>
+
+        <!-- Suggestions Cards Grid -->
+        <div class="suggestions-grid" id="suggestionCards"></div>
       </div>
     </main>
 
