@@ -2,16 +2,83 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Urban Energy Dashboard</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Smart Urban Energy Dashboard</h1>
 
-    <div id="dashboard">
-      <p id="energy-value">Laden...</p>
-      <p id="ai-result"></p>
+     <header class="topbar">
+        <div class="logo-wrapper">
+            <div class="logo-icon">⚡</div>
+            <div>
+                <h2>Smart Urban Energy Dashboard</h2>
+                <p>Energieverbruik in Nederlandse steden</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <select>
+                <option>Amsterdam</option>
+            </select>
+
+            <select>
+                <option>Deze week</option>
+            </select>
+        </div>
+    </header>
+
+    <section class="cards">
+
+        <div class="card">
+            <span class="card-title">Totaal Verbruik ⚡</span>
+            <h2>1847 MWh</h2>
+            <p>Deze week</p>
+            <span class="badge gray">7 dagen</span>
+        </div>
+
+        <div class="card">
+            <span class="card-title">Piekreductie 🔽</span>
+            <h2 class="green">12.3%</h2>
+            <p>t.o.v vorige periode</p>
+            <span class="badge green">Optimaal</span>
+        </div>
+
+        <div class="card">
+            <span class="card-title">CO₂ Reductie ℹ️</span>
+            <h2 class="blue">245 ton</h2>
+            <p>Bespaar­de uitstoot</p>
+            <span class="badge blue">Impact</span>
+        </div>
+
+        <div class="card">
+            <span class="card-title">Efficiëntie 💡</span>
+            <h2 class="orange">87%</h2>
+            <p>Gemiddelde score</p>
+            <span class="badge orange">Goed</span>
+        </div>
+
+    </section>
+
+    <nav class="tabs">
+        <button class="active">Overzicht</button>
+        <button>Analyse</button>
+        <button>Wijken</button>
+        <button>Adviezen</button>
+    </nav>
+
+    <section class="chart-section">
+        <h3>Energieverbruik Over Tijd</h3>
+        <p>Real-time verbruiksdata voor Amsterdam</p>
+
+
+        <div class="chart-placeholder">
+            <p>Grafiek komt hier</p>
     </div>
+    
+
+    </section>
+
 
     <script src="js/api.js"></script>
     <script src="js/app.js"></script>
