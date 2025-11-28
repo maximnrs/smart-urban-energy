@@ -252,3 +252,41 @@ footer {
   border-color: #a7f3d0;
   color: #065f46;
 }
+
+/* ================= DISTRICTS ================= */
+
+.districts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.districts-cards {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+}
+
+.district-card {
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.district-card h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.district-metric {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.district-metric strong {
+  font-weight: 700;
+}

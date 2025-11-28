@@ -189,22 +189,6 @@ function renderEnergyChart() {
 renderEnergyChart();
 overviewCity.textContent = `Real-time verbruiksdata voor ${capitalize(city)}`;
 
-// ===== Districts =====
-function renderDistricts() {
-  districtList.innerHTML = districtsData
-    .map(
-      (d) => `
-    <div class="card">
-      <h4>${d.name}</h4>
-      <p>Totaal verbruik: ${d.verbruik} MWh</p>
-      <p>Duurzame energie: ${d.duurzaam} MWh</p>
-    </div>
-  `
-    )
-    .join("");
-}
-renderDistricts();
-
 // ===== Peak Analysis =====
 let peakChart;
 
@@ -245,6 +229,65 @@ function renderPeakAnalysis() {
   });
 }
 renderPeakAnalysis();
+
+// ===== Districts =====
+let districtChart;
+
+function renderDistricts() {
+  const cardsContainer = document.getElementById("districtCards");
+
+  // Cards bouwen
+  cardsContainer.innerHTML = districtsData
+    .map(
+      (d) => `
+      <div class="district-card">
+        <h4>${d.name}</h4>
+
+        <div class="district-metric">
+          <span>Totaal verbruik</span>
+          <strong>${d.verbruik} MWh</strong>
+        </div>
+
+        <div class="district-metric">
+          <span>Duurzaam</span>
+          <strong style="color:#10b981;">${d.duurzaam} MWh</strong>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+
+  // Chart bouwen
+  const ctx = document.getElementById("districtChart").getContext("2d");
+
+  if (districtChart) districtChart.destroy();
+
+  districtChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: districtsData.map((d) => d.name),
+      datasets: [
+        {
+          label: "Totaal Verbruik (MWh)",
+          data: districtsData.map((d) => d.verbruik),
+          backgroundColor: "#3b82f6",
+        },
+        {
+          label: "Duurzame Energie (MWh)",
+          data: districtsData.map((d) => d.duurzaam),
+          backgroundColor: "#10b981",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "bottom" },
+      },
+    },
+  });
+}
+renderDistricts();
 
 // ===== Savings Suggestions =====
 function renderSavings() {
