@@ -291,15 +291,42 @@ renderDistricts();
 
 // ===== Savings Suggestions =====
 function renderSavings() {
-  savingsContainer.innerHTML = savingsSuggestions
-    .map(
-      (s) => `
-    <div class="card">
-      <h4>${s.advies}</h4>
-      <p>Besparing: ${s.besparing}</p>
-    </div>
-  `
-    )
+  const suggestionCards = document.getElementById("suggestionCards");
+  const aiSavings = document.getElementById("aiSavings");
+
+  // Fake AI calculation 😎
+  const totalPercentage = savingsSuggestions.reduce((sum, s) => {
+    return sum + parseInt(s.besparing.replace("%", ""));
+  }, 0);
+
+  const estimatedEuro = Math.round((totalPercentage / 100) * 220);
+
+  aiSavings.textContent = `€ ${estimatedEuro} per maand`;
+
+  suggestionCards.innerHTML = savingsSuggestions
+    .map((s, i) => {
+      let impactClass = "impact-low";
+
+      if (i === 0) impactClass = "impact-high";
+      if (i === 1) impactClass = "impact-medium";
+
+      return `
+        <div class="suggestion-card">
+          <h4>${s.advies}</h4>
+          <p>Geschatte besparing: <strong>${s.besparing}</strong></p>
+
+          <span class="suggestion-impact ${impactClass}">
+            ${
+              impactClass === "impact-high"
+                ? "Hoge impact"
+                : impactClass === "impact-medium"
+                ? "Gemiddelde impact"
+                : "Lage impact"
+            }
+          </span>
+        </div>
+      `;
+    })
     .join("");
 }
 renderSavings();

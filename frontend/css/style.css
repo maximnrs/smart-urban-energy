@@ -290,3 +290,75 @@ footer {
 .district-metric strong {
   font-weight: 700;
 }
+
+/* ================= SUGGESTIONS ================= */
+
+.suggestions-grid {
+  display: grid;
+  gap: 30px;
+}
+
+/* AI card */
+.ai-card {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  text-align: center;
+}
+
+.ai-card h3 {
+  color: #fff;
+}
+
+.ai-main {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 16px 0 6px;
+}
+
+.ai-sub {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Cards grid */
+.suggestions-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.suggestion-card {
+  padding: 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.suggestion-card h4 {
+  margin: 0 0 10px;
+}
+
+.suggestion-impact {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Impact colors */
+.impact-high {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.impact-medium {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.impact-low {
+  background: #dbeafe;
+  color: #1e40af;
+}
