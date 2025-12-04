@@ -10,16 +10,6 @@ exports.analyzeEnergy = (value) => {
     }
 };
 
-// Besparingssuggesties
-const savingsSuggestions = [
-  { advies: "Gebruik energiezuinige verlichting", besparing: "15%" },
-  { advies: "Vermijd piekuren bij opladen van EV", besparing: "10%" },
-  { advies: "Optimaliseer verwarming en koeling per wijk", besparing: "20%" },
-];
-
-// ===== Element =====
-const savingsContainer = document.getElementById("suggestions");
-
 // ===== Savings Suggestions =====
 function renderSavings() {
   const suggestionCards = document.getElementById("suggestionCards");
