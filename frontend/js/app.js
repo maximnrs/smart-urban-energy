@@ -350,7 +350,7 @@ function renderDistricts() {
 }
 renderDistricts();
 
-// ===== Savings Suggestions =====
+// ===== AI: Savings Suggestions =====
 function renderSavings() {
   const suggestionCards = document.getElementById("suggestionCards");
   const aiCity = document.getElementById("aiCity");
