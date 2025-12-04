@@ -2,18 +2,133 @@
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Urban Energy Dashboard</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <h1>Smart Urban Energy Dashboard</h1>
+    <header class="header">
+      <div class="container header-inner">
+        <div class="header-left">
+          <div class="icon-box zap">⚡</div>
+          <div>
+            <h1>Smart Urban Energy Dashboard</h1>
+            <p>Energieverbruik in Nederlandse steden</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <select id="citySelect">
+            <option value="amsterdam">Amsterdam</option>
+            <option value="rotterdam">Rotterdam</option>
+            <option value="denhaag">Den Haag</option>
+            <option value="utrecht">Utrecht</option>
+          </select>
+          <select id="timeRangeSelect">
+            <option value="day">Gisteren</option>
+            <option value="week" selected>Afgelopen week</option>
+            <option value="month">Afgelopen maand</option>
+            <option value="year">Dit jaar</option>
+          </select>
+        </div>
+      </div>
+    </header>
 
-    <div id="dashboard">
-      <p id="energy-value">Laden...</p>
-      <p id="ai-result"></p>
-    </div>
+    <main class="container">
+      <!-- KPI Cards -->
+      <div class="grid grid-4" id="kpiCards"></div>
 
-    <script src="js/api.js"></script>
-    <script src="js/app.js"></script>
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="overview">Overzicht</button>
+        <button class="tab-button" data-tab="analysis">Analyse</button>
+        <button class="tab-button" data-tab="districts">Wijken</button>
+        <button class="tab-button" data-tab="suggestions">Adviezen</button>
+      </div>
+
+      <div class="tab-content active" id="overview">
+        <div class="card chart-card">
+          <h3>Energieverbruik Over Tijd</h3>
+          <canvas id="energyChart"></canvas>
+        </div>
+      </div>
+
+      <div class="tab-content" id="analysis">
+        <div class="analysis-grid">
+          <!-- Chart -->
+          <div class="card chart-card">
+            <h3>Piekmoment Analyse</h3>
+            <canvas id="peakChart"></canvas>
+          </div>
+
+          <!-- KPI Blocks -->
+          <div class="analysis-kpis">
+            <div class="analysis-kpi red">
+              <h4>Ochtendspits</h4>
+              <p id="morningPeak">-</p>
+              <span class="badge">06:00 - 09:00</span>
+            </div>
+
+            <div class="analysis-kpi yellow">
+              <h4>Daluren</h4>
+              <p id="eveningPeak">-</p>
+              <span class="badge">12:00 - 15:00</span>
+            </div>
+
+            <div class="analysis-kpi green">
+              <h4>Avondpiek</h4>
+              <p id="lowPeak">-</p>
+              <span class="badge">18:00 - 21:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="districts">
+        <div class="districts-grid">
+          <!-- Chart -->
+          <div class="card chart-card">
+            <h3>Wijkverbruik Vergelijking</h3>
+            <canvas id="districtChart"></canvas>
+          </div>
+
+          <!-- Wijk Cards -->
+          <div class="districts-cards" id="districtCards"></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="suggestions">
+        <!-- AI Card -->
+        <div class="card ai-card">
+          <h3>🤖 AI Besparingsadviezen</h3>
+          <p class="ai-sub">
+            Op basis van data-analyse voor <span id="aiCity">Amsterdam</span>
+          </p>
+          <div class="ai-stats">
+            <div class="ai-stat">
+              <p>Totale Besparing</p>
+              <p class="ai-value" id="aiTotalSavings">€ 14.0M / jaar</p>
+            </div>
+            <div class="ai-stat">
+              <p>CO₂ Reductie</p>
+              <p class="ai-value" id="aiCO2">1.915 ton</p>
+            </div>
+            <div class="ai-stat">
+              <p>Actieve Adviezen</p>
+              <p class="ai-value" id="aiActive">6 prioriteiten</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestions Cards Grid -->
+        <div class="suggestions-grid" id="suggestionCards"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Smart Urban Energy Dashboard</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
   </body>
 </html>
