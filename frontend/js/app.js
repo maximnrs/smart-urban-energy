@@ -19,11 +19,11 @@ const districtsData = [
 // Piekanalyse (peak analysis)
 const peakAnalysisData = [
   {
-    time: "07:00 - 09:00",
+    time: "06:00 - 09:00",
     verbruik: 250,
     advies: "Slimme thermostaten aanzetten",
   },
-  { time: "12:00 - 14:00", verbruik: 220, advies: "PV-panelen optimaliseren" },
+  { time: "12:00 - 15:00", verbruik: 220, advies: "PV-panelen optimaliseren" },
   { time: "18:00 - 21:00", verbruik: 300, advies: "Apparaten spreiden" },
 ];
 
