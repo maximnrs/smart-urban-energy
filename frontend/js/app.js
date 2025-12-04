@@ -2,10 +2,33 @@
 let city = "amsterdam";
 let timeRange = "week";
 
-const totalConsumption = 1847;
-const peakReduction = 12.3;
-const co2Reduction = 245;
-const efficiency = 87;
+// ===== KPI DATA PER TIMERANGE =====
+const kpiData = {
+  day: {
+    totalConsumption: 68,
+    peakReduction: 4.1,
+    co2Reduction: 12,
+    efficiency: 82,
+  },
+  week: {
+    totalConsumption: 1847,
+    peakReduction: 12.3,
+    co2Reduction: 245,
+    efficiency: 87,
+  },
+  month: {
+    totalConsumption: 7420,
+    peakReduction: 18.6,
+    co2Reduction: 980,
+    efficiency: 91,
+  },
+  year: {
+    totalConsumption: 86500,
+    peakReduction: 26.4,
+    co2Reduction: 14200,
+    efficiency: 94,
+  },
+};
 
 // Wijken (districts) data
 const districtsData = [
@@ -51,28 +74,33 @@ function renderKPIs() {
     year: ["365 dagen", "Dit jaar"],
   };
 
+  const currentKPI = kpiData[timeRange];
+
   kpiCardsContainer.innerHTML = `
     <div class="card">
       <h3>Totaal Verbruik⚡</h3>
-      <p style="font-weight: bold;">${totalConsumption} MWh</p>
+      <p style="font-weight: bold;">${currentKPI.totalConsumption} MWh</p>
       <p>${timeLabels[timeRange][1]}</p>
       <span class="badge">${timeLabels[timeRange][0]}</span>
     </div>
+
     <div class="card">
       <h3>Piekreductie 🔽</h3>
-      <p style="color:#10b981; font-weight: bold;">${peakReduction}%</p>
+      <p style="color:#10b981; font-weight: bold;">${currentKPI.peakReduction}%</p>
       <p>t.o.v. vorige periode</p>
       <span class="badge" style="background:#d1fae5;color:#065f46">Optimaal</span>
     </div>
+
     <div class="card">
       <h3>CO₂ Reductie ℹ️</h3>
-      <p style="color:#3b82f6; font-weight: bold;">${co2Reduction} ton</p>
+      <p style="color:#3b82f6; font-weight: bold;">${currentKPI.co2Reduction} ton</p>
       <p>Bespaarde uitstoot</p>
       <span class="badge" style="background:#dbeafe;color:#1d4ed8">Impact</span>
     </div>
+
     <div class="card">
       <h3>Efficiëntie 💡</h3>
-      <p style="color:#f59e0b; font-weight: bold;">${efficiency}%</p>
+      <p style="color:#f59e0b; font-weight: bold;">${currentKPI.efficiency}%</p>
       <p>Gemiddelde score</p>
       <span class="badge" style="background:#fef3c7;color:#b45309">Goed</span>
     </div>
@@ -177,7 +205,6 @@ const fixedEnergyData = {
 function generateData() {
   return fixedEnergyData[timeRange];
 }
-
 
 // ===== Chart Rendering =====
 let energyChart;
