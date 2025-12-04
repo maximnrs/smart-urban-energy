@@ -369,7 +369,7 @@ function renderSavings() {
     {
       icon: "💡",
       title: "Slimme Straatverlichting",
-      description: "Vervang traditionele straatverlichting door LED met bewegingssensoren. Reduceer verbruik met 60% tijdens daluren.",
+      description: "Vervang de huidige lantaarnpalen door LED. Geschat efficiëntie: 60%.",
       impact: "Hoog",
       savings: "€ 1.8M / jaar",
       co2Reduction: "240 ton CO₂",
@@ -387,7 +387,7 @@ function renderSavings() {
     {
       icon: "🔋",
       title: "Energie Opslag Systemen",
-      description: "Installeer batterij-opslagsystemen bij zonne- en windparken om piekvraag te nivelleren.",
+      description: "Installeer batterijen bij zonne- en windparken om energie beter te verdelen over drukke en rustige momenten.",
       impact: "Hoog",
       savings: "€ 1.5M / jaar",
       co2Reduction: "180 ton CO₂",
@@ -405,7 +405,7 @@ function renderSavings() {
     {
       icon: "⚡",
       title: "Smart Grid Optimalisatie",
-      description: "Implementeer AI-gestuurd smart grid systeem voor betere vraag-aanbod balancering in realtime.",
+      description: "Gebruik een slim energiesysteem met AI om vraag en aanbod te balanceren.",
       impact: "Gemiddeld",
       savings: "€ 980K / jaar",
       co2Reduction: "145 ton CO₂",
