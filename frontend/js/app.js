@@ -114,80 +114,114 @@ function capitalize(str) {
 }
 
 // ===== Charts =====
+const fixedEnergyData = {
+  day: [
+    { x: "00:00", verbruik: 52, duurzaam: 20 },
+    { x: "01:00", verbruik: 48, duurzaam: 19 },
+    { x: "02:00", verbruik: 46, duurzaam: 18 },
+    { x: "03:00", verbruik: 45, duurzaam: 18 },
+    { x: "04:00", verbruik: 44, duurzaam: 17 },
+    { x: "05:00", verbruik: 47, duurzaam: 18 },
+    { x: "06:00", verbruik: 60, duurzaam: 22 },
+    { x: "07:00", verbruik: 75, duurzaam: 28 },
+    { x: "08:00", verbruik: 92, duurzaam: 35 },
+    { x: "09:00", verbruik: 105, duurzaam: 42 },
+    { x: "10:00", verbruik: 110, duurzaam: 45 },
+    { x: "11:00", verbruik: 115, duurzaam: 47 },
+    { x: "12:00", verbruik: 120, duurzaam: 50 },
+    { x: "13:00", verbruik: 118, duurzaam: 49 },
+    { x: "14:00", verbruik: 125, duurzaam: 53 },
+    { x: "15:00", verbruik: 130, duurzaam: 55 },
+    { x: "16:00", verbruik: 138, duurzaam: 57 },
+    { x: "17:00", verbruik: 150, duurzaam: 60 },
+    { x: "18:00", verbruik: 165, duurzaam: 63 },
+    { x: "19:00", verbruik: 158, duurzaam: 60 },
+    { x: "20:00", verbruik: 135, duurzaam: 52 },
+    { x: "21:00", verbruik: 115, duurzaam: 44 },
+    { x: "22:00", verbruik: 90, duurzaam: 35 },
+    { x: "23:00", verbruik: 70, duurzaam: 28 }
+  ],
+
+  week: [
+    { x: "Ma", verbruik: 220, duurzaam: 90 },
+    { x: "Di", verbruik: 235, duurzaam: 95 },
+    { x: "Wo", verbruik: 250, duurzaam: 102 },
+    { x: "Do", verbruik: 245, duurzaam: 98 },
+    { x: "Vr", verbruik: 270, duurzaam: 110 },
+    { x: "Za", verbruik: 200, duurzaam: 88 },
+    { x: "Zo", verbruik: 180, duurzaam: 80 }
+  ],
+
+  month: Array.from({ length: 30 }, (_, i) => ({
+    x: i + 1,
+    verbruik: 220 + i * 4,
+    duurzaam: 85 + i * 2
+  })),
+
+  year: [
+    { x: "Jan", verbruik: 1500, duurzaam: 600 },
+    { x: "Feb", verbruik: 1480, duurzaam: 610 },
+    { x: "Mrt", verbruik: 1520, duurzaam: 640 },
+    { x: "Apr", verbruik: 1580, duurzaam: 690 },
+    { x: "Mei", verbruik: 1620, duurzaam: 720 },
+    { x: "Jun", verbruik: 1680, duurzaam: 780 },
+    { x: "Jul", verbruik: 1720, duurzaam: 820 },
+    { x: "Aug", verbruik: 1700, duurzaam: 810 },
+    { x: "Sep", verbruik: 1650, duurzaam: 780 },
+    { x: "Okt", verbruik: 1600, duurzaam: 740 },
+    { x: "Nov", verbruik: 1550, duurzaam: 690 },
+    { x: "Dec", verbruik: 1620, duurzaam: 730 }
+  ]
+};
+
 function generateData() {
-  if (timeRange === "day") {
-    return Array.from({ length: 24 }, (_, i) => ({
-      x: `${i}:00`,
-      verbruik: Math.floor(Math.random() * 30 + 40 + Math.sin(i / 4) * 20),
-      duurzaam: Math.floor(Math.random() * 15 + 15),
-    }));
-  } else if (timeRange === "week") {
-    const days = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"];
-    return days.map((d, i) => ({
-      x: d,
-      verbruik: Math.floor(Math.random() * 50 + 200),
-      duurzaam: Math.floor(Math.random() * 30 + 80),
-    }));
-  } else if (timeRange === "month") {
-    return Array.from({ length: 30 }, (_, i) => ({
-      x: i + 1,
-      verbruik: Math.floor(Math.random() * 50 + 200),
-      duurzaam: Math.floor(Math.random() * 30 + 80),
-    }));
-  } else {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mrt",
-      "Apr",
-      "Mei",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Okt",
-      "Nov",
-      "Dec",
-    ];
-    return months.map((m) => ({
-      x: m,
-      verbruik: Math.floor(Math.random() * 200 + 1500),
-      duurzaam: Math.floor(Math.random() * 100 + 600),
-    }));
-  }
+  return fixedEnergyData[timeRange];
 }
 
+
+// ===== Chart Rendering =====
 let energyChart;
+
 function renderEnergyChart() {
   const ctx = document.getElementById("energyChart").getContext("2d");
   const data = generateData();
+
   if (energyChart) energyChart.destroy();
+
   energyChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: data.map((d) => d.x),
+      labels: data.map(d => d.x),
       datasets: [
         {
           label: "Totaal Verbruik (MWh)",
-          data: data.map((d) => d.verbruik),
-          borderColor: "#3b82f6",
-          backgroundColor: "rgba(59,130,246,0.2)",
+          data: data.map(d => d.verbruik),
+          borderColor: "#2563eb",
+          backgroundColor: "rgba(37,99,235,0.15)",
           fill: true,
+          tension: 0.4
         },
         {
           label: "Duurzame Energie (MWh)",
-          data: data.map((d) => d.duurzaam),
+          data: data.map(d => d.duurzaam),
           borderColor: "#10b981",
-          backgroundColor: "rgba(16,185,129,0.2)",
+          backgroundColor: "rgba(16,185,129,0.15)",
           fill: true,
-        },
-      ],
+          tension: 0.4
+        }
+      ]
     },
-    options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "bottom" }
+      }
+    }
   });
 }
+
 renderEnergyChart();
-overviewCity.textContent = `Real-time verbruiksdata voor ${capitalize(city)}`;
+overviewCity.textContent = `Energieverbruik voor ${capitalize(city)}`;
 
 // ===== Peak Analysis =====
 let peakChart;
