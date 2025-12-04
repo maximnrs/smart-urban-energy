@@ -1,3 +1,5 @@
 node_modules
 .env
+backend/database/database.db
 database/database.sql
+frontend/index.html
