@@ -10,10 +10,10 @@ const efficiency = 87;
 // Wijken (districts) data
 const districtsData = [
   { name: "Centrum", verbruik: 320, duurzaam: 120 },
-  { name: "Zuid", verbruik: 210, duurzaam: 90 },
-  { name: "Oost", verbruik: 180, duurzaam: 60 },
-  { name: "West", verbruik: 200, duurzaam: 80 },
   { name: "Noord", verbruik: 150, duurzaam: 40 },
+  { name: "Oost", verbruik: 180, duurzaam: 60 },
+  { name: "Zuid", verbruik: 210, duurzaam: 90 },
+  { name: "West", verbruik: 200, duurzaam: 80 },
 ];
 
 // Piekanalyse (peak analysis)
