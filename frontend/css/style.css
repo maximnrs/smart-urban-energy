@@ -17,8 +17,16 @@
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, #e2ebf6 0%, transparent 40%),
+    radial-gradient(circle at bottom right, #dbffec 0%, transparent 40%),
+    linear-gradient(180deg, var(--background), #eef2ff);
   color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Container */
@@ -464,4 +472,78 @@ footer {
 .suggestion-stat-box p:last-child {
   margin: 0;
   font-weight: 700;
+}
+
+/* ================= LOGIN PAGE ================= */
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, #b7d6ff 0%, transparent 40%),
+    radial-gradient(circle at bottom right, #8bfec2 0%, transparent 40%),
+    linear-gradient(180deg, var(--background), #eef2ff);
+}
+
+.login-container {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--radius);
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.06);
+}
+
+.login-container h1 {
+  color: var(--text-color);
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: #f8fafc;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.login-container button {
+  width: 100%;
+  background: var(--primary);
+  border: none;
+  padding: 12px;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.login-container button:hover {
+  background: #1e40af;
+}
+
+#loginError {
+  color: red;
+  margin-top: 16px;
+  font-size: 14px;
 }
